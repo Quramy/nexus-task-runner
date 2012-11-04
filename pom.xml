@@ -13,6 +13,13 @@
 	<version>0.9-SNAPSHOT</version>
 	<name>Nexus Task Runner Plugin</name>
 	<packaging>hpi</packaging>
+	
+	<scm>
+		<connection>scm:git:ssh://github.com/Quramy/nexus-task-runner.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/Quramy/nexus-task-runner.git</developerConnection>
+		<url>https://github.com/Quramy/nexus-task-runner.git</url>
+	</scm>
+	<url>http://wiki.jenkins-ci.org/display/JENKINS/Nexus+Task+Runner+Plugin</url>
 
 	<dependencies>
 		<dependency>
