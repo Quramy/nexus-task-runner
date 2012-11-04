@@ -1,0 +1,50 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<!-- This Jelly script is used to produce the global configuration option. 
+		Jenkins uses a set of tag libraries to provide uniformity in forms. To determine 
+		where this tag is defined, first check the namespace URI, and then look under 
+		$JENKINS/views/. For example, <f:section> is defined in $JENKINS/views/lib/form/section.jelly. 
+		It's also often useful to just check other similar scripts to see what tags 
+		they use. Views are always organized according to its owner class, so it 
+		should be straightforward to find them. -->
+
+	<!-- <f:entry filed="nexus" title="Select Nexus" name="nexus"> <select name="nexus"> 
+		<j:forEach var="item" items="${descriptor.nexusList}"> <option value="${item.name}" 
+		selected="${item.name eq it.selected}">${item.name}[${item.url}, ${it.selected}]</option> 
+		</j:forEach> </select> </f:entry> -->
+
+	<!-- <f:entry field="nexus" title="Select Nexus"> <f:select /> </f:entry> -->
+
+
+	<!-- <f:dropdownDescriptorSelector title="Select Nexus" field="selectedNexus" 
+		descriptors="${descriptor.nexusList}" /> -->
+
+	<link rel="stylesheet" type="text/css"
+		href="${rootURL}/plugin/nexus-task-runner/css/jquery-ui-1.9.1.custom.min.css"></link>
+	<script type="text/javascript"
+		src="${rootURL}/plugin/nexus-task-runner/js/jquery-1.8.2.js"></script>
+	<script type="text/javascript">var $$ = jQuery.noConflict();</script>
+	<script type="text/javascript"
+		src="${rootURL}/plugin/nexus-task-runner/js/jquery-ui-1.9.1.custom.min.js"></script>
+
+
+
+	<f:entry field="nexusName" title="Selected Nexus">
+		<f:select clazz="nexus-selection" />
+	</f:entry>
+
+	<f:entry field="tasks" title="Task">
+		<f:textbox clazz="nexus-task-list" />
+	</f:entry>
+	
+	<script type="text/javascript">
+		var NEXUS_TASKS = ${descriptor.tasksAsJson};
+	</script>
+	<script type="text/javascript"
+		src="${rootURL}/plugin/nexus-task-runner/js/NexusTaskPublisher.js"></script>
+
+
+	<f:entry title="Running tasks" field="taskList">
+		<f:repeatableProperty field="taskList" />
+	</f:entry>
+</j:jelly>

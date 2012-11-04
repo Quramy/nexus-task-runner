@@ -1,0 +1,10 @@
+work
+target
+.project
+.classpath
+.settings/
+*.swp
+*.swo
+.DS_Store
+src/test/java/snipets/*
+
