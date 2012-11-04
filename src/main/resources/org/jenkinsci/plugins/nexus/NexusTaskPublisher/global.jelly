@@ -11,14 +11,14 @@
     tags they use. Views are always organized according to its owner class,
     so it should be straightforward to find them.
   -->
-  <f:section title="${descriptor.displayName}">
+  <f:section title="Nexus task runner">
 <!--     <f:entry title="French" field="useFrench" -->
 <!--       description="Check if we should say hello in French"> -->
 <!--       <f:checkbox /> -->
 <!--     </f:entry> -->
     
     
-	<f:entry title="Nexus connecting for" field="nexusList">
+	<f:entry title="List of registered Nexus" field="nexusList">
 		<f:repeatableProperty title="Add Nexus" field="nexusList" />
 	</f:entry>
   </f:section>

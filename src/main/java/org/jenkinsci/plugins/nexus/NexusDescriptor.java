@@ -84,9 +84,9 @@ public class NexusDescriptor extends AbstractDescribableImpl<NexusDescriptor> {
 				@QueryParameter("user") final String user, @QueryParameter("password") final String password) {
 			NexusClient client = new NexusJerseyClient(url, user, password);
 			if (client.ping()) {
-				return FormValidation.ok();
+				return FormValidation.ok("Success to connect to " + url);
 			} else {
-				return FormValidation.error("failed to connect to " + url);
+				return FormValidation.error("Failed to connect to " + url);
 			}
 		}
 

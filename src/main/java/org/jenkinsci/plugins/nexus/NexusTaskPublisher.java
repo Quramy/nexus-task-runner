@@ -36,9 +36,7 @@ import org.sonatype.nexus.rest.model.ScheduledServiceListResourceResponse;
 @SuppressWarnings("deprecation")
 public class NexusTaskPublisher extends Publisher {
 
-
 	private final String tasks;
-
 
 	private final NexusDescriptor selectedNexus;
 
@@ -163,7 +161,7 @@ public class NexusTaskPublisher extends Publisher {
 		public Map<String, NexusDescriptor> getNexusMap() {
 			return this.nexusMap;
 		}
-		
+
 		public FormValidation doCheckTasks(@QueryParameter String value) {
 			return FormValidation.validateRequired(value);
 		}
@@ -195,11 +193,11 @@ public class NexusTaskPublisher extends Publisher {
 			this.nexusMap = nexusMap;
 		}
 
-		@DataBoundConstructor
-		public DescriptorImpl(Map<String, NexusDescriptor> nexusMap) {
-			super();
-			this.nexusMap = nexusMap;
-		}
+		// @DataBoundConstructor
+		// public DescriptorImpl(Map<String, NexusDescriptor> nexusMap) {
+		// super();
+		// this.nexusMap = nexusMap;
+		// }
 
 		public boolean isApplicable(Class<? extends AbstractProject<?, ?>> aClass) {
 			// Indicates that this builder can be used with all kinds of project
@@ -207,28 +205,23 @@ public class NexusTaskPublisher extends Publisher {
 			return true;
 		}
 
-		/**
-		 * This human readable name is used in the configuration screen.
-		 */
 		public String getDisplayName() {
-			return "Nexus task runner";
+			return "Run Nexus's task";
 		}
-
-		private String[] nameList = { "hoge", "foo" };
 
 		public ListBoxModel doFillNexusNameItems() {
 
 			ListBoxModel items = new ListBoxModel();
 			if (nexusMap != null) {
 				for (String name : nexusMap.keySet()) {
-					items.add(name + "[" + nexusMap.get(name).getUrl() + "]", name);
+					items.add(name + " [" + nexusMap.get(name).getUrl() + "]", name);
 				}
 			}
 			return items;
 		}
 
 		@Override
-		public boolean configure(StaplerRequest req, JSONObject formData) throws FormException {
+		public synchronized boolean configure(StaplerRequest req, JSONObject formData) throws FormException {
 
 			// The following codes are bad...
 			// How to bind formData to List<Discriptor> ?

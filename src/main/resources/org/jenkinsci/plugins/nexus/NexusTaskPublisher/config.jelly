@@ -8,43 +8,35 @@
 		they use. Views are always organized according to its owner class, so it 
 		should be straightforward to find them. -->
 
-	<!-- <f:entry filed="nexus" title="Select Nexus" name="nexus"> <select name="nexus"> 
-		<j:forEach var="item" items="${descriptor.nexusList}"> <option value="${item.name}" 
-		selected="${item.name eq it.selected}">${item.name}[${item.url}, ${it.selected}]</option> 
-		</j:forEach> </select> </f:entry> -->
+	<j:if test="${descriptor.nexusList.size() gt 0}">
+		<link rel="stylesheet" type="text/css"
+			href="${rootURL}/plugin/nexus-task-runner/css/jquery-ui-1.9.1.custom.min.css"></link>
+		<script type="text/javascript"
+			src="${rootURL}/plugin/nexus-task-runner/js/jquery-1.8.2.js"></script>
+		<script type="text/javascript">var $$ = jQuery.noConflict();</script>
+		<script type="text/javascript"
+			src="${rootURL}/plugin/nexus-task-runner/js/jquery-ui-1.9.1.custom.min.js"></script>
 
-	<!-- <f:entry field="nexus" title="Select Nexus"> <f:select /> </f:entry> -->
+		<f:entry field="nexusName" title="Selected Nexus">
+			<f:select clazz="nexus-selection" />
+		</f:entry>
 
+		<f:entry field="tasks" title="Scheduled task name">
+			<f:textbox clazz="nexus-task-list" />
+		</f:entry>
 
-	<!-- <f:dropdownDescriptorSelector title="Select Nexus" field="selectedNexus" 
-		descriptors="${descriptor.nexusList}" /> -->
+		<script type="text/javascript">
+			var NEXUS_TASKS = ${descriptor.tasksAsJson};
+		</script>
+		<script type="text/javascript"
+			src="${rootURL}/plugin/nexus-task-runner/js/NexusTaskPublisher.js"></script>
+	</j:if>
+	<j:if test="${descriptor.nexusList.size() le 0}">
+		<f:entry>
+			There is no Nexus in your Jenkins ! <br />
+			Register and manage your Nexus at <a href="/configure">system configuration page</a>
+			.
+		</f:entry>
+	</j:if>
 
-	<link rel="stylesheet" type="text/css"
-		href="${rootURL}/plugin/nexus-task-runner/css/jquery-ui-1.9.1.custom.min.css"></link>
-	<script type="text/javascript"
-		src="${rootURL}/plugin/nexus-task-runner/js/jquery-1.8.2.js"></script>
-	<script type="text/javascript">var $$ = jQuery.noConflict();</script>
-	<script type="text/javascript"
-		src="${rootURL}/plugin/nexus-task-runner/js/jquery-ui-1.9.1.custom.min.js"></script>
-
-
-
-	<f:entry field="nexusName" title="Selected Nexus">
-		<f:select clazz="nexus-selection" />
-	</f:entry>
-
-	<f:entry field="tasks" title="Task">
-		<f:textbox clazz="nexus-task-list" />
-	</f:entry>
-	
-	<script type="text/javascript">
-		var NEXUS_TASKS = ${descriptor.tasksAsJson};
-	</script>
-	<script type="text/javascript"
-		src="${rootURL}/plugin/nexus-task-runner/js/NexusTaskPublisher.js"></script>
-
-
-	<f:entry title="Running tasks" field="taskList">
-		<f:repeatableProperty field="taskList" />
-	</f:entry>
 </j:jelly>

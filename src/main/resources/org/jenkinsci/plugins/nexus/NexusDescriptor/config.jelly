@@ -6,7 +6,7 @@
 	<!-- Creates a text field that shows the value of the "name" property. When 
 		submitted, it will be passed to the corresponding constructor parameter. -->
 
-	<f:entry title="Name" field="name">
+	<f:entry title="ID" field="name">
 		<f:textbox />
 	</f:entry>
 	<f:entry title="Nexus URL" field="url">
@@ -22,7 +22,6 @@
 
 		<f:validateButton title="Test connection" progress="Progress..."
 			method="testConnection" with="url,user,password" />
-
 	</div>
 	<f:entry title="">
 
