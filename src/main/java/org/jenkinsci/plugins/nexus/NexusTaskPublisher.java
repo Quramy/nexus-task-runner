@@ -1,6 +1,5 @@
 package org.jenkinsci.plugins.nexus;
 
-import groovy.json.JsonException;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.model.BuildListener;
@@ -20,7 +19,10 @@ import java.util.Map;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONException;
+import net.sf.json.JSONFunction;
 import net.sf.json.JSONObject;
+import net.sf.json.test.JSONAssert;
+import net.sf.json.util.JSONUtils;
 
 import org.jenkinsci.plugins.nexus.rest.NexusClient;
 import org.jenkinsci.plugins.nexus.rest.NexusJerseyClient;
@@ -99,7 +101,7 @@ public class NexusTaskPublisher extends Publisher {
 
 		TaskUtil taskUtil = new TaskUtil(client);
 
-		List<TaskStatus> statusList = new ArrayList<TaskStatus>();
+		// List<TaskStatus> statusList = new ArrayList<TaskStatus>();
 
 		// Build ToDo list
 		List<ScheduledServiceListResource> todoList = new ArrayList<ScheduledServiceListResource>();
@@ -243,7 +245,7 @@ public class NexusTaskPublisher extends Publisher {
 						NexusDescriptor desc = parse((JSONObject) json);
 						nexusMap.put(desc.getName(), desc);
 					}
-				} catch (JsonException ee) {
+				} catch (JSONException ee) {
 					// exec in this path only if nexusList is empty.
 				}
 			}
